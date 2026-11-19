@@ -47,6 +47,15 @@ export default function MovieDetailModal({ movie, onClose }) {
           <div className="absolute bottom-4 left-6 right-6">
             <div className="flex flex-wrap items-center gap-2 mb-2">
               <RatingBadge rating={movie.rating} size="lg" />
+              {movie.language === 'Telugu' ? (
+                <span className="px-2.5 py-1 rounded-md bg-amber-500/20 text-amber-400 text-xs font-bold border border-amber-500/30">
+                  🇮🇳 Telugu Cinema (టాలీవుడ్)
+                </span>
+              ) : (
+                <span className="px-2.5 py-1 rounded-md bg-indigo-500/20 text-indigo-300 text-xs font-semibold border border-indigo-500/30">
+                  🌍 {movie.language || 'English'}
+                </span>
+              )}
               <span className="px-2.5 py-1 rounded-md bg-white/10 backdrop-blur-md text-xs font-semibold text-gray-200 border border-white/10">
                 {movie.rated || 'PG-13'}
               </span>

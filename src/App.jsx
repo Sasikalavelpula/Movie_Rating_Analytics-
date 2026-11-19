@@ -15,12 +15,13 @@ import {
   getReleaseTimeline
 } from './utils/analyticsHelpers';
 
-import { Sparkles, TrendingUp, BarChart2 } from 'lucide-react';
+import { Sparkles, Film } from 'lucide-react';
 
 export default function App() {
   const [movies] = useState(MOCK_MOVIES);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('All');
+  const [selectedLanguage, setSelectedLanguage] = useState('All');
   const [minRating, setMinRating] = useState(0);
   const [sortBy, setSortBy] = useState('rating_desc');
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -42,21 +43,30 @@ export default function App() {
   const filteredMovies = useMemo(() => {
     return movies
       .filter((movie) => {
-        // Search query
+        // Search query (matches title, director, genre, language, synopsis, and keyword variations)
         const query = searchQuery.toLowerCase().trim();
         const matchesSearch =
           !query ||
           movie.title.toLowerCase().includes(query) ||
           movie.director.toLowerCase().includes(query) ||
+          (movie.language && movie.language.toLowerCase().includes(query)) ||
+          (query === 'tollywood' && movie.language === 'Telugu') ||
+          (query === 'hollywood' && movie.language === 'English') ||
+          movie.synopsis.toLowerCase().includes(query) ||
           movie.genres.some(g => g.toLowerCase().includes(query));
 
+        // Language filter
+        const matchesLanguage =
+          selectedLanguage === 'All' || movie.language === selectedLanguage;
+
         // Genre filter
-        const matchesGenre = selectedGenre === 'All' || movie.genres.includes(selectedGenre);
+        const matchesGenre =
+          selectedGenre === 'All' || movie.genres.includes(selectedGenre);
 
         // Rating filter
         const matchesRating = movie.rating >= minRating;
 
-        return matchesSearch && matchesGenre && matchesRating;
+        return matchesSearch && matchesLanguage && matchesGenre && matchesRating;
       })
       .sort((a, b) => {
         switch (sortBy) {
@@ -76,11 +86,12 @@ export default function App() {
             return 0;
         }
       });
-  }, [movies, searchQuery, selectedGenre, minRating, sortBy]);
+  }, [movies, searchQuery, selectedLanguage, selectedGenre, minRating, sortBy]);
 
   const handleResetFilters = () => {
     setSearchQuery('');
     setSelectedGenre('All');
+    setSelectedLanguage('All');
     setMinRating(0);
     setSortBy('rating_desc');
   };
@@ -94,17 +105,17 @@ export default function App() {
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         
         {/* Hero Section */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-gray-900 via-gray-900/90 to-indigo-950/40 border border-gray-800 p-6 sm:p-8 backdrop-blur-xl">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-gray-900 via-gray-900/90 to-amber-950/30 border border-gray-800 p-6 sm:p-8 backdrop-blur-xl">
           <div className="relative z-10 max-w-2xl space-y-3">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-semibold">
               <Sparkles size={14} />
-              <span>Real-Time Cinema Metrics & Analytics</span>
+              <span>Tollywood & Global Cinema Analytics</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Movie Rating <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200">Analytics</span> & Performance
+              Movie Rating <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200">Analytics</span> & Insights
             </h2>
             <p className="text-sm sm:text-base text-gray-400 leading-relaxed">
-              Explore critical ratings, audience voting distributions, genre benchmarks, and historical timeline trends for the world's most acclaimed films.
+              Explore critical ratings, audience voting distributions, genre benchmarks, and historical trends for top Telugu classics, Tollywood blockbusters, and global masterpieces.
             </p>
           </div>
 
@@ -134,6 +145,8 @@ export default function App() {
             setSearchQuery={setSearchQuery}
             selectedGenre={selectedGenre}
             setSelectedGenre={setSelectedGenre}
+            selectedLanguage={selectedLanguage}
+            setSelectedLanguage={setSelectedLanguage}
             genres={allGenres}
             sortBy={sortBy}
             setSortBy={setSortBy}

@@ -48,13 +48,21 @@ export default function MovieCard({ movie, rank, onSelect }) {
       {/* Content */}
       <div className="p-4 flex flex-col flex-1 justify-between gap-3">
         <div>
-          {/* Release Year and Certificate */}
-          <div className="flex items-center gap-2 text-xs text-gray-400 mb-1">
+          {/* Release Year, Certificate, and Language */}
+          <div className="flex items-center gap-2 text-xs text-gray-400 mb-1 flex-wrap">
             <span className="font-semibold text-gray-300">{movie.releaseYear}</span>
             <span>•</span>
             <span className="px-1.5 py-0.5 rounded bg-gray-800 text-[11px] text-gray-300 border border-gray-700 font-mono">
               {movie.rated || 'PG-13'}
             </span>
+            {movie.language === 'Telugu' && (
+              <>
+                <span>•</span>
+                <span className="px-1.5 py-0.5 rounded bg-amber-500/15 text-[11px] text-amber-400 border border-amber-500/30 font-semibold">
+                  🇮🇳 Telugu
+                </span>
+              </>
+            )}
             <span>•</span>
             <span className="flex items-center gap-1 text-[11px]">
               <Clock size={11} className="text-gray-500" />

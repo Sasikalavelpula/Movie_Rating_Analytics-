@@ -30,7 +30,7 @@ export function calculateKPIs(movies) {
   const sortedByMeta = [...movies].sort((a, b) => (b.metascore || 0) - (a.metascore || 0));
   const highestMetascore = sortedByMeta[0];
 
-  // Top genre by average rating (with at least 2 movies if possible)
+  // Top genre by average rating (with at least 2 movies)
   const genreMap = {};
   movies.forEach(movie => {
     movie.genres.forEach(g => {
@@ -64,11 +64,11 @@ export function calculateKPIs(movies) {
 
 export function getRatingDistribution(movies) {
   const buckets = [
-    { range: '8.4 - 8.5', min: 8.4, max: 8.59, count: 0, movies: [] },
-    { range: '8.6 - 8.7', min: 8.6, max: 8.79, count: 0, movies: [] },
-    { range: '8.8 - 8.9', min: 8.8, max: 8.99, count: 0, movies: [] },
-    { range: '9.0 - 9.1', min: 9.0, max: 9.19, count: 0, movies: [] },
-    { range: '9.2+',       min: 9.2, max: 10.0, count: 0, movies: [] },
+    { range: '7.5 - 7.9', min: 7.5, max: 7.99, count: 0, movies: [] },
+    { range: '8.0 - 8.4', min: 8.0, max: 8.49, count: 0, movies: [] },
+    { range: '8.5 - 8.7', min: 8.5, max: 8.79, count: 0, movies: [] },
+    { range: '8.8 - 9.0', min: 8.8, max: 9.09, count: 0, movies: [] },
+    { range: '9.1+',       min: 9.1, max: 10.0, count: 0, movies: [] },
   ];
 
   movies.forEach(movie => {
@@ -119,16 +119,16 @@ export function getGenreRatings(movies) {
 export function getReleaseTimeline(movies) {
   // Group by era or decade
   const eraMap = {
-    '1970s': { era: '1970s', count: 0, sumRating: 0, avgRating: 0 },
-    '1990s': { era: '1990s', count: 0, sumRating: 0, avgRating: 0 },
-    '2000s': { era: '2000s', count: 0, sumRating: 0, avgRating: 0 },
-    '2010s': { era: '2010s', count: 0, sumRating: 0, avgRating: 0 },
-    '2020s': { era: '2020s', count: 0, sumRating: 0, avgRating: 0 },
+    '1950s-70s': { era: '1950s-70s', count: 0, sumRating: 0, avgRating: 0 },
+    '1990s':     { era: '1990s',     count: 0, sumRating: 0, avgRating: 0 },
+    '2000s':     { era: '2000s',     count: 0, sumRating: 0, avgRating: 0 },
+    '2010s':     { era: '2010s',     count: 0, sumRating: 0, avgRating: 0 },
+    '2020s':     { era: '2020s',     count: 0, sumRating: 0, avgRating: 0 },
   };
 
   movies.forEach(movie => {
     let era = '2020s';
-    if (movie.releaseYear < 1980) era = '1970s';
+    if (movie.releaseYear < 1980) era = '1950s-70s';
     else if (movie.releaseYear < 2000) era = '1990s';
     else if (movie.releaseYear < 2010) era = '2000s';
     else if (movie.releaseYear < 2020) era = '2010s';
