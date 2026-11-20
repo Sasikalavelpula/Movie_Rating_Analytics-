@@ -29,7 +29,5 @@ dist-ssr
 .env.local
 .env.*.local
 
-# Local Documentation & Scripts
-docs/
-scripts/
+
 

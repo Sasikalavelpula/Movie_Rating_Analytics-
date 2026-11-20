@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineMetrics — Presentation Slides</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0B0F19;
+      color: #F3F4F6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    .slide-container {
+      width: 90vw;
+      max-width: 1000px;
+      height: 580px;
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 48px;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 40px rgba(245, 158, 11, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+    .slide {
+      display: none;
+      height: 100%;
+      flex-direction: column;
+      justify-content: center;
+      animation: fadeIn 0.4s ease;
+    }
+    .slide.active {
+      display: flex;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: rgba(245, 158, 11, 0.15);
+      color: #FBBF24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      align-self: flex-start;
+    }
+    h1, h2, h3 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    h1 {
+      font-size: 48px;
+      line-height: 1.15;
+      color: #FFFFFF;
+      margin-bottom: 16px;
+    }
+    h1 span {
+      background: linear-gradient(135deg, #F59E0B, #FBBF24);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    h2 {
+      font-size: 32px;
+      color: #FFFFFF;
+      margin-bottom: 24px;
+      border-bottom: 2px solid rgba(245, 158, 11, 0.3);
+      padding-bottom: 12px;
+    }
+    p {
+      font-size: 16px;
+      color: #9CA3AF;
+      line-height: 1.6;
+    }
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    li {
+      font-size: 18px;
+      color: #E5E7EB;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    li::before {
+      content: "✦";
+      color: #F59E0B;
+      font-weight: bold;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .card h3 {
+      font-size: 18px;
+      color: #FBBF24;
+      margin-bottom: 8px;
+    }
+    .card p {
+      font-size: 14px;
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 90vw;
+      max-width: 1000px;
+      margin-top: 20px;
+      padding: 0 10px;
+    }
+    .btn {
+      background: #1F2937;
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 10px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      background: #F59E0B;
+      color: #000;
+      border-color: #F59E0B;
+    }
+    .btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .page-indicator {
+      font-size: 14px;
+      color: #6B7280;
+      font-weight: 600;
+    }
+    .presenter-note {
+      margin-top: 18px;
+      padding: 12px 16px;
+      background: rgba(99, 102, 241, 0.1);
+      border-left: 3px solid #6366F1;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #A5B4FC;
+    }
+    a.live-link {
+      color: #FBBF24;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide-container">
+    <!-- Slide 1 -->
+    <div class="slide active">
+      <span class="badge">Project Presentation</span>
+      <h1>Cine<span>Metrics</span></h1>
+      <p style="font-size: 20px; color: #D1D5DB; margin-bottom: 24px;">Modern Movie Rating Analytics & Performance Dashboard</p>
+      <p><strong>Presenter:</strong> Sasikala Velpula</p>
+      <p><strong>Stack:</strong> React 18 • Tailwind CSS • Recharts • Vite • GitHub Actions</p>
+      <p style="margin-top: 10px;"><strong>Live Site:</strong> <a class="live-link" href="https://sasikalavelpula.github.io/Movie_Rating_Analytics-/" target="_blank">sasikalavelpula.github.io/Movie_Rating_Analytics-</a></p>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide">
+      <span class="badge">Motivation</span>
+      <h2>Problem Statement & Objectives</h2>
+      <ul>
+        <li><strong>Scattered Data:</strong> Movie ratings and critical scores on platforms like IMDb and Rotten Tomatoes are siloed across individual film pages.</li>
+        <li><strong>Lack of High-Level Insights:</strong> Difficult to quickly see score distributions, genre benchmark averages, or historical era trajectories.</li>
+        <li><strong>Our Objective:</strong> Create a responsive, unified analytics dashboard with interactive charts, real-time filtering, and zero-friction CI/CD deployment.</li>
+      </ul>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide">
+      <span class="badge">Architecture</span>
+      <h2>Technology Stack</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Frontend UI & State</h3>
+          <p><strong>React 18 & Vite:</strong> Lightning-fast compilation, reactive component tree, and instant Hot Module Replacement.</p>
+        </div>
+        <div class="card">
+          <h3>Styling & Design</h3>
+          <p><strong>Tailwind CSS:</strong> Sleek dark cinema palette, custom glassmorphism, responsive breakpoints, and gold star badges.</p>
+        </div>
+        <div class="card">
+          <h3>Visual Analytics</h3>
+          <p><strong>Recharts:</strong> Declarative, responsive SVG charts with animated tooltips and customized gradients.</p>
+        </div>
+        <div class="card">
+          <h3>DevOps & Deployment</h3>
+          <p><strong>GitHub Actions & Pages:</strong> Automated build pipeline triggering on git push with instant live CDN deployment.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide">
+      <span class="badge">Dashboard Core</span>
+      <h2>Executive KPI Metrics</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Total Movies</h3>
+          <p><strong>24 Curated Acclaimed Titles</strong> covering cinema masterpieces across multiple decades.</p>
+        </div>
+        <div class="card">
+          <h3>Weighted Average Rating</h3>
+          <p><strong>⭐ 8.71 / 10</strong> aggregate quality benchmark across the catalog.</p>
+        </div>
+        <div class="card">
+          <h3>Audience Engagement</h3>
+          <p><strong>36.6 Million+</strong> total community votes analyzed across all titles.</p>
+        </div>
+        <div class="card">
+          <h3>#1 Rated Spotlight</h3>
+          <p><strong>The Shawshank Redemption</strong> highlighted with 9.3/10 score and 2.85M votes.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="slide">
+      <span class="badge">Visualizations</span>
+      <h2>Interactive Charts (Recharts)</h2>
+      <ul>
+        <li><strong>Rating Distribution (Bar Chart):</strong> Segments movie counts into score brackets (8.4-8.5, 8.6-8.7, 8.8-8.9, 9.0-9.1, 9.2+).</li>
+        <li><strong>Average Rating by Genre (Horizontal Bar):</strong> Compares quality benchmarks across Drama, Sci-Fi, Crime, Action, Animation, and Adventure.</li>
+        <li><strong>Decade Trends (Area Chart):</strong> Maps score evolution from 1970s classics to modern 2020s releases with smooth gradient fills.</li>
+      </ul>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="slide">
+      <span class="badge">User Experience</span>
+      <h2>Filtering, Search & Exploration</h2>
+      <ul>
+        <li><strong>Real-Time Search:</strong> Searches by movie title, director name, and genre keywords simultaneously.</li>
+        <li><strong>Genre Pill Filters:</strong> Single-click filtering across Drama, Sci-Fi, Crime, Animation, and more.</li>
+        <li><strong>Score Thresholds:</strong> Quick selection for 8.5+, 8.7+, and 9.0+ Masterpiece tiers.</li>
+        <li><strong>View Modes:</strong> Dynamic switcher between visual <strong>Grid Cards</strong> and compact <strong>Table List</strong>.</li>
+        <li><strong>Detail Modal:</strong> Full inspection dialog with synopsis, box office figures, runtime, and metascore.</li>
+      </ul>
+    </div>
+
+    <!-- Slide 7 -->
+    <div class="slide">
+      <span class="badge">DevOps</span>
+      <h2>Continuous Deployment (CI/CD)</h2>
+      <ul>
+        <li><strong>Git Repository:</strong> Source code version-controlled on GitHub.</li>
+        <li><strong>Automated Pipeline:</strong> <code>.github/workflows/deploy.yml</code> runs on every push to <code>main</code>.</li>
+        <li><strong>Zero Downtime:</strong> Automatically installs packages, compiles production bundle via Vite, and uploads to GitHub Pages.</li>
+        <li><strong>Production Status:</strong> Live and verified with HTTP 200 OK status.</li>
+      </ul>
+    </div>
+
+    <!-- Slide 8 -->
+    <div class="slide">
+      <span class="badge">Conclusion</span>
+      <h2>Future Enhancements & Wrap Up</h2>
+      <ul>
+        <li><strong>Live TMDB API:</strong> Connect live streaming API for real-time synchronization of newly released movies.</li>
+        <li><strong>Review Sentiment Analysis:</strong> NLP classification of user review comments.</li>
+        <li><strong>User Bookmarks:</strong> Personal watchlists and user rating inputs.</li>
+      </ul>
+      <div class="presenter-note">
+        <strong>Demo:</strong> Visit <a class="live-link" href="https://sasikalavelpula.github.io/Movie_Rating_Analytics-/" target="_blank">https://sasikalavelpula.github.io/Movie_Rating_Analytics-/</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide Navigation Controls -->
+  <div class="controls">
+    <button class="btn" id="prevBtn" onclick="changeSlide(-1)">◀ Previous</button>
+    <span class="page-indicator" id="pageIndicator">Slide 1 of 8</span>
+    <button class="btn" id="nextBtn" onclick="changeSlide(1)">Next ▶</button>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const indicator = document.getElementById('pageIndicator');
+
+    function updateSlide() {
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx === currentSlide);
+      });
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.disabled = currentSlide === slides.length - 1;
+      indicator.textContent = `Slide ${currentSlide + 1} of ${slides.length}`;
+    }
+
+    function changeSlide(direction) {
+      currentSlide = Math.max(0, Math.min(slides.length - 1, currentSlide + direction));
+      updateSlide();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') changeSlide(1);
+      if (e.key === 'ArrowLeft') changeSlide(-1);
+    });
+
+    updateSlide();
+  </script>
+</body>
+</html>
